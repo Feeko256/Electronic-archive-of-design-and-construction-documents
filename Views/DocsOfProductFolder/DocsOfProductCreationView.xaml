@@ -8,7 +8,7 @@
                   mc:Ignorable="d"
                   Title="DocsOfProductCreationView" Height="450" Width="800"
                   xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF">
-    <Grid ShowGridLines="True">
+    <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>

@@ -11,6 +11,8 @@
         xmlns:productFolder="clr-namespace:Electronic_archive_of_design_and_construction_documents.ViewModels.ProductFolder"
         xmlns:docsOfProductFolder="clr-namespace:Electronic_archive_of_design_and_construction_documents.Views.DocsOfProductFolder"
         xmlns:projectFolder1="clr-namespace:Electronic_archive_of_design_and_construction_documents.Views.ProjectFolder"
+        xmlns:documentFolder="clr-namespace:Electronic_archive_of_design_and_construction_documents.ViewModels.DocumentFolder"
+        xmlns:documents="clr-namespace:Electronic_archive_of_design_and_construction_documents.Views.Documents"
 
 
         mc:Ignorable="d"
@@ -18,15 +20,15 @@
     <Window.Resources>      
 
         <DataTemplate DataType="{x:Type projectFolder:ProjectVewModel}">
-
             <projectFolder1:ProjectPage/>
-
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type productFolder:DocsOfProductViewModel}">
-
             <docsOfProductFolder:DocsOfProductPage/>
-
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type documentFolder:DocumentViewModel}">
+            <documents:DocumentsPage/>
         </DataTemplate>
 
     </Window.Resources> 

@@ -1,0 +1,23 @@
+﻿<Page x:Class="Electronic_archive_of_design_and_construction_documents.Views.Documents.DrawibleDocumentPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:documentFolder="clr-namespace:Electronic_archive_of_design_and_construction_documents.ViewModels.DocumentFolder"
+      d:DataContext="{d:DesignInstance Type=documentFolder:DocumentDrawableViewModel}"
+      mc:Ignorable="d"
+      Title="DrawibleDocumentPage" Height="450" Width="800">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+
+                <TextBlock Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Заголовок: "></TextBlock>
+                <TextBlock Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="{Binding Document.DocContentThechDrawning.Header  }"></TextBlock>
+            </StackPanel>  
+            <StackPanel>
+                <TextBlock Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="эта надпись только при выбранном документе-чертеже"></TextBlock> 
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</Page>

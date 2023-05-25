@@ -41,8 +41,4 @@
       <PackageReference Include="ModernWpfUI" Version="0.9.7-preview.2" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Views\Documents\" />
-    </ItemGroup>
-
 </Project>

@@ -2,6 +2,7 @@
 using Electronic_archive_of_design_and_construction_documents.Core;
 using Electronic_archive_of_design_and_construction_documents.Core.Mediator;
 using Electronic_archive_of_design_and_construction_documents.Models;
+using Electronic_archive_of_design_and_construction_documents.ViewModels.DocumentFolder;
 using Electronic_archive_of_design_and_construction_documents.Views.DocsOfProductFolder;
 
 namespace Electronic_archive_of_design_and_construction_documents.ViewModels.ProductFolder;
@@ -12,8 +13,10 @@ public class DocsOfProductViewModel : BaseViewModel
     public Project Project { get; set; }
     private object lastVM;
     private RelayCommand goToProjects;
+    private RelayCommand goToDocuments;
     private Mediator mediator;
     private ApplicationContext db;
+    private Docs_of_product selectedProduct;
     private DocsOfProductCreationView createProductView { get; set; }
     private RelayCommand addProductCommand;
     public RelayCommand GoToProjects
@@ -25,6 +28,31 @@ public class DocsOfProductViewModel : BaseViewModel
             {
                 mediator.OnViewModelChange(lastVM);
             });
+        }
+    }
+    public Docs_of_product? SelectedProduct
+    {
+        get { return selectedProduct; }
+        set 
+        {
+            selectedProduct = value; 
+            OnPropertyChanged();
+
+            if (SelectedProduct?.Documents == null)
+                SelectedProduct.Documents = new ObservableCollection<Document>();
+        }
+    }
+    public RelayCommand GoToDocuments
+    {
+        get
+        {
+            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
+            return goToDocuments ??= new RelayCommand(obj =>
+            {
+                mediator.OnViewModelChange(new DocumentViewModel(mediator, this, db));
+                if (SelectedProduct != null) 
+                    mediator.OnSelectedProductChange(SelectedProduct);
+            }, obj => SelectedProduct != null);
         }
     }
     public RelayCommand AddProductCommand

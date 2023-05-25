@@ -8,7 +8,7 @@
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:project="clr-namespace:Electronic_archive_of_design_and_construction_documents.ViewModels.ProjectFolder"
         Height="450" Width="800">
-    <Grid ShowGridLines="True">
+    <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>

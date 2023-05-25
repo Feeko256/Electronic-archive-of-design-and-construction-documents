@@ -6,7 +6,7 @@
                   xmlns:viewModels="clr-namespace:Electronic_archive_of_design_and_construction_documents.ViewModels.ProductFolder"
                   d:DataContext="{d:DesignInstance Type=viewModels:DocsOfProductViewModel}"
                   mc:Ignorable="d">
-    <Grid ShowGridLines="True">
+    <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="*"/>
@@ -25,7 +25,7 @@
             <TextBlock Margin="5" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Text="{Binding Project.Header, StringFormat={}Управление продуктами в проекте: {0}}"></TextBlock>
             <TextBlock Margin="5" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" Text="Список продуктов"></TextBlock>
 
-            <ListBox VirtualizingPanel.ScrollUnit="Pixel" SelectedItem="{Binding SelectedPduct}" ItemsSource="{Binding Products  }" Grid.Column="1" Grid.Row="4" BorderBrush="{DynamicResource AccentFillColorDefaultBrush}" BorderThickness="2">
+            <ListBox VirtualizingPanel.ScrollUnit="Pixel" SelectedItem="{Binding SelectedProduct}" ItemsSource="{Binding Products  }" Grid.Column="1" Grid.Row="4" BorderBrush="{DynamicResource AccentFillColorDefaultBrush}" BorderThickness="2">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -35,15 +35,15 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <Button Command="{Binding GoToProjects}"> Вернуться к проектам</Button>
-            <Button Command="{Binding Next}"> Переход на страницу документов продукта</Button>
+            <Button Command="{Binding GoToProjects}"> Вернуться на страницу проектов</Button>
+            <Button Command="{Binding GoToDocuments}"> Переход на страницу документов продукта</Button>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal">
-            <Button Command="{Binding AddProductCommand}" CommandParameter="{Binding SelectedPoduct}" Margin="5" Content="Создать продукт"></Button>
+            <Button Command="{Binding AddProductCommand}" Margin="5" Content="Создать продукт"></Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="4">
             <TextBlock FontSize="14" Text="Заголовок: "></TextBlock>
-            <TextBlock FontSize="14" Text="{Binding SelectedPoduct.Header}"></TextBlock>
+            <TextBlock FontSize="14" Text="{Binding SelectedProduct.Header}"></TextBlock>
         </StackPanel>
     </Grid>
 </UserControl>

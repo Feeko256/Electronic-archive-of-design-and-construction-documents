@@ -43,7 +43,7 @@
             <Button Command="{Binding GoToProducts}"> Переход на страницу продуктов проекта</Button>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal">
-            <Button Command="{Binding AddProjectCommand}" CommandParameter="{Binding SelectedProject}" Margin="5"
+            <Button Command="{Binding AddProjectCommand}" Margin="5"
                     Content="Создать проект">
             </Button>
         </StackPanel>

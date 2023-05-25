@@ -25,8 +25,7 @@ public class ProjectVewModel : BaseViewModel
         {
             selectedProject = value; 
             OnPropertyChanged();
-
-                if (SelectedProject?.DocsOfProduct == null)
+            if (SelectedProject?.DocsOfProduct == null)
                     SelectedProject.DocsOfProduct = new ObservableCollection<Docs_of_product>();
         }
     }
