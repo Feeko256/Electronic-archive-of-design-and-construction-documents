@@ -1,9 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using Electronic_archive_of_design_and_construction_documents.Core;
 using Electronic_archive_of_design_and_construction_documents.Core.Mediator;
 using Electronic_archive_of_design_and_construction_documents.Models;
 using Electronic_archive_of_design_and_construction_documents.Views.Documents;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32;
 
 namespace Electronic_archive_of_design_and_construction_documents.ViewModels.DocumentFolder;
 
@@ -20,10 +23,12 @@ public class DocumentViewModel  : BaseViewModel
     private Docs_of_product selectedProduct;
     private object? selectedViewModel;
     private Document selectedDocument;
+    private RelayCommand addNewDocFileCommand;
     private DrawibleDocumentCreationView createDrawableCreationView { get; set; }
     private OtherDocumentCreationView createOtherCreationView { get; set; }
 
     private RelayCommand addProductCommand;
+
     
     public RelayCommand GoToProducts
     {
@@ -43,14 +48,14 @@ public class DocumentViewModel  : BaseViewModel
         {
             selectedDocument = value; 
             OnPropertyChanged();
-            if (SelectedDocument?.DocContentThechDrawning != null)
+            if (SelectedDocument?.Doc_Content_Tech_Drawning != null)
             {
                 
                 mediator.OnSelectedDocumentTypeViewModelChange(new DocumentDrawableViewModel(mediator));
                 mediator.OnSelectedDocumentChange(SelectedDocument); 
             }
     
-            else if (SelectedDocument?.DocContentOther != null)
+            else if (SelectedDocument?.Doc_Content_Other != null)
             {
 
                 mediator.OnSelectedDocumentTypeViewModelChange( new DocumentOtherViewModel(mediator));  
@@ -93,7 +98,7 @@ public class DocumentViewModel  : BaseViewModel
                 createDrawableCreationView = new DrawibleDocumentCreationView()
                 {
 
-                    DataContext = new DocumentDrawableCreationViewModel(mediator)
+                    DataContext = new DocumentDrawingCreationViewModel(mediator)
                 };
                 if (createDrawableCreationView.ShowDialog() == true)
                 {
@@ -101,6 +106,44 @@ public class DocumentViewModel  : BaseViewModel
                     //при открытии диалогового окна для создания проекта
                 }
             });
+        }
+    }
+    public RelayCommand AddNewDocFileCommand
+    {
+        get
+        {
+            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
+            return addNewDocFileCommand ??= new RelayCommand(obj =>
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                openFileDialog.Filter = "All files (*.*)|*.*";
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    if (SelectedDocument?.Doc_Content_Other != null)
+                    {
+                        if (SelectedDocument.Doc_Content_Other[0].Source == null)
+                            SelectedDocument.Doc_Content_Other[0].Source = new ObservableCollection<string>();
+                        SelectedDocument.Doc_Content_Other[0].Source?.Add(openFileDialog.FileName);
+                        foreach (var a in SelectedDocument.Doc_Content_Other)
+                        {
+                            db.Entry(a).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                    }
+                    else if (SelectedDocument?.Doc_Content_Tech_Drawning != null)
+                    {
+                        if (SelectedDocument.Doc_Content_Tech_Drawning[0].Source == null)
+                            SelectedDocument.Doc_Content_Tech_Drawning[0].Source = new ObservableCollection<string>();
+                        SelectedDocument.Doc_Content_Tech_Drawning?[0].Source?.Add(openFileDialog.FileName);
+                        foreach (var a in SelectedDocument.Doc_Content_Tech_Drawning)
+                        {
+                            db.Entry(a).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                    }
+                }
+            }, obj => SelectedDocument != null);
         }
     }
     
@@ -132,9 +175,5 @@ public class DocumentViewModel  : BaseViewModel
         this.mediator.SelectedProduct += OnSelectedProductChange;
         this.mediator.SelectedDocumentTypeViewModel += OnSelectedDocumentTypeViewModelChange;
         this.mediator.DocumentCreate += OnProjectCreation;
- 
-        //SelectedViewModel = new DocumentDrawableViewModel(this.mediator);
-        //SelectedViewModel = new DocumentOtherViewModel(this.mediator);
-       // mediator.OnSelectedDocumentTypeViewModelChange(null);
     }
 }
