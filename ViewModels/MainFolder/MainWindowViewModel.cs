@@ -57,7 +57,7 @@ public class MainWindowViewModel : BaseViewModel
         db.Docs_of_product.Load();
         db.Document.Load();
         db.doc_content_other.Load();
-        db.doc_content_thech_drawning.Load();
+        db.doc_content_tech_drawning.Load();
         //отправка таблицы проектов в колекцию проектов внутри программы для дальнейшей работы с ними
         //другие таблицы так подгружать не надо вроде
         Project = db.Project.Local.ToObservableCollection();

@@ -11,11 +11,17 @@ public class ProjectCreationViewModel : BaseViewModel
     private Mediator mediator;
     private RelayCommand createProject;
     private string header;
+    private string annotation;
 
     public string Header
     {
         get { return header; }
         set { header = value; OnPropertyChanged(); }
+    } 
+    public string Annotation
+    {
+        get { return annotation; }
+        set { annotation = value; OnPropertyChanged(); }
     }
 
     public RelayCommand CreateProject
@@ -25,7 +31,7 @@ public class ProjectCreationViewModel : BaseViewModel
             // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
             return createProject ??= new RelayCommand(obj =>
             {
-                var project = new Project { Header = this.Header, DocsOfProduct = new ObservableCollection<Docs_of_product>()};
+                var project = new Project { Header = this.Header, Annotation = this.Annotation,DocsOfProduct = new ObservableCollection<Docs_of_product>()};
                 mediator.OnProjectCreation(project);
                 CloseWindow(obj);
             });

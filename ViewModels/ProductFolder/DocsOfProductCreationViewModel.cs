@@ -11,7 +11,7 @@ public class DocsOfProductCreationViewModel : BaseViewModel
     private Mediator mediator;
     private RelayCommand createProduct;
     private string header;
-
+    private string annotation;
     public string Header
     {
         get { return header; }
@@ -20,6 +20,11 @@ public class DocsOfProductCreationViewModel : BaseViewModel
             header = value;
             OnPropertyChanged();
         }
+    }
+    public string Annotation
+    {
+        get { return annotation; }
+        set { annotation = value; OnPropertyChanged(); }
     }
 
     public RelayCommand CreateProduct
@@ -30,7 +35,7 @@ public class DocsOfProductCreationViewModel : BaseViewModel
             return createProduct ??= new RelayCommand(obj =>
             {
                 var product = new Docs_of_product()
-                    { Header = this.Header, Documents = new ObservableCollection<Document>() };
+                    { Header = this.Header, Annotation = this.Annotation, Documents = new ObservableCollection<Document>() };
                 mediator.OnProductCreate(product);
                     CloseWindow(obj);
             });

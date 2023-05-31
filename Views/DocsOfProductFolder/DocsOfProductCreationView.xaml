@@ -10,15 +10,32 @@
                   xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF">
     <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-   
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Text="{Binding Header}"></TextBox>
-        <Button Grid.Row="1" Command="{Binding CreateProduct}"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Margin="5" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center"
+                   VerticalAlignment="Center" FontSize="20" Text="Создание документа изделия">
+        </TextBlock>
+        <Border Margin="10" BorderBrush="{DynamicResource AccentFillColorDefaultBrush}" BorderThickness="2" Grid.Column="1" Grid.Row="2">
+            <StackPanel Orientation="Vertical">
+                <TextBlock FontWeight="Bold" FontSize="16" Text="Заголовок: "></TextBlock>
+                <TextBox FontSize="14" Text="{Binding Header}" TextWrapping="Wrap"></TextBox>
+                <TextBlock FontWeight="Bold" FontSize="16" Text="Аннотация: "></TextBlock>
+                <TextBox FontSize="14" Text="{Binding Annotation}" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+            </StackPanel>
+        </Border>
+        <Button Grid.Column="1"  Grid.Row="3" Command="{Binding CreateProduct}"
                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
                  AncestorType={x:Type Window}}, Path=.}"
-                Content="add">
+                Content="Создать продукт">
         </Button>
     </Grid>
 </fw:AcrylicWindow>

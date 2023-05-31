@@ -7,16 +7,27 @@ namespace Electronic_archive_of_design_and_construction_documents.Models;
 public class Document : BaseViewModel
 {
     public int Id { get; set; }
-    private doc_content_other? docContentOther { get; set; }
-    private doc_content_thech_drawning? docContentThechDrawning { get; set; }
-    private string? header;
-    private string type;
-    public string Type
+    private ObservableCollection<doc_content_other> ? docContentOther { get; set; }
+    private ObservableCollection<doc_content_thech_drawning> ? docContentThechDrawning { get; set; }
+    private string header;
+    private string doc_type;
+    private string note;
+    
+    public string Doc_type
     {
-        get { return type; }
+        get { return doc_type; }
         set
         {
-            type = value;
+            doc_type = value;
+            OnPropertyChanged();
+        }
+    }
+    public string Note
+    {
+        get { return note; }
+        set
+        {
+            note = value;
             OnPropertyChanged();
         }
     }
@@ -25,12 +36,12 @@ public class Document : BaseViewModel
         get { return header; }
         set { header = value; OnPropertyChanged(); }
     }
-    public doc_content_other? DocContentOther
+    public ObservableCollection<doc_content_other>? Doc_Content_Other
     {
         get { return docContentOther; }
         set { docContentOther = value; OnPropertyChanged(); }
     }
-    public doc_content_thech_drawning? DocContentThechDrawning
+    public ObservableCollection<doc_content_thech_drawning>? Doc_Content_Tech_Drawning
     {
         get { return docContentThechDrawning; }
         set { docContentThechDrawning = value; OnPropertyChanged(); }

@@ -4,18 +4,48 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:documentFolder="clr-namespace:Electronic_archive_of_design_and_construction_documents.ViewModels.DocumentFolder"
+      xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:core="clr-namespace:Electronic_archive_of_design_and_construction_documents.Core"
       d:DataContext="{d:DesignInstance Type=documentFolder:DocumentDrawableViewModel}"
       mc:Ignorable="d"
-      Title="DrawibleDocumentPage" Height="450" Width="800">
-    <Grid>
+      Title="DrawibleDocumentPage">
+    <Page.Resources>
+        <core:PathToFileNameConverter x:Key="PathToFileNameConverter"/>
+    </Page.Resources>
+    <Grid ShowGridLines="True">
         <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
-
-                <TextBlock Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Заголовок: "></TextBlock>
-                <TextBlock Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="{Binding Document.DocContentThechDrawning.Header  }"></TextBlock>
-            </StackPanel>  
-            <StackPanel>
-                <TextBlock Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="эта надпись только при выбранном документе-чертеже"></TextBlock> 
+            <StackPanel Margin="10" Orientation="Vertical">
+                <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Дата создания"/>
+                <TextBlock FontSize="14" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="{Binding Document.Doc_Content_Tech_Drawning[0].Created_at  }"/>
+                <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Обозначение" />
+                <TextBlock FontSize="14" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="{Binding Document.Doc_Content_Tech_Drawning[0].Denotation  }"/>
+                <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Материал" />
+                <TextBlock FontSize="14" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="{Binding Document.Doc_Content_Tech_Drawning[0].Material  }"/>
+                <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Литера" />
+                <TextBlock FontSize="14" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="{Binding Document.Doc_Content_Tech_Drawning[0].Letter  }"/>
+                <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Масса" />
+                <TextBlock FontSize="14" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="{Binding Document.Doc_Content_Tech_Drawning[0].Mass  }"/>
+                <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Размер" />
+                <TextBlock FontSize="14" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="{Binding Document.Doc_Content_Tech_Drawning[0].Scale  }"/>
+                <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Название компании" />
+                <TextBlock FontSize="14" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="{Binding Document.Doc_Content_Tech_Drawning[0].Company_name  }"/>
+                <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Версия документа" />
+                <TextBlock FontSize="14" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="{Binding Document.Doc_Content_Tech_Drawning[0].Version_number  }"/>
+                <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Список файлов" />
+                <ListBox SelectedItem="{Binding SelectedDocFile}" ItemsSource="{Binding Document.Doc_Content_Tech_Drawning[0].Source}" VirtualizingPanel.ScrollUnit="Pixel" BorderBrush="{DynamicResource AccentFillColorDefaultBrush}" BorderThickness="2">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding Converter={StaticResource PathToFileNameConverter}}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="MouseDoubleClick">
+                            <b:InvokeCommandAction Command="{Binding OpenFileCommand}" CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ListBox>
             </StackPanel>
         </StackPanel>
 

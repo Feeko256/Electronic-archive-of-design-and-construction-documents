@@ -22,10 +22,10 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
-            <TextBlock Margin="5" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Text="{Binding Project.Header, StringFormat={}Управление продуктами в проекте: {0}}"></TextBlock>
-            <TextBlock Margin="5" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" Text="Список продуктов"></TextBlock>
+            <TextBlock Margin="5" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Text="{Binding Project.Header, StringFormat={}Управление документами изделия {0}}"></TextBlock>
+            <TextBlock Margin="5" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" Text="Список документов изделия"></TextBlock>
 
-            <ListBox VirtualizingPanel.ScrollUnit="Pixel" SelectedItem="{Binding SelectedProduct}" ItemsSource="{Binding Products  }" Grid.Column="1" Grid.Row="4" BorderBrush="{DynamicResource AccentFillColorDefaultBrush}" BorderThickness="2">
+            <ListBox Margin="10" VirtualizingPanel.ScrollUnit="Pixel" SelectedItem="{Binding SelectedProduct}" ItemsSource="{Binding Products  }" Grid.Column="1" Grid.Row="4" BorderBrush="{DynamicResource AccentFillColorDefaultBrush}" BorderThickness="2">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -39,11 +39,16 @@
             <Button Command="{Binding GoToDocuments}"> Переход на страницу документов продукта</Button>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal">
-            <Button Command="{Binding AddProductCommand}" Margin="5" Content="Создать продукт"></Button>
+            <Button Command="{Binding AddProductCommand}" Margin="5" Content="Создать изделие"></Button>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="4">
-            <TextBlock FontSize="14" Text="Заголовок: "></TextBlock>
-            <TextBlock FontSize="14" Text="{Binding SelectedProduct.Header}"></TextBlock>
-        </StackPanel>
+        <Border Margin="10" BorderBrush="{DynamicResource AccentFillColorDefaultBrush}" BorderThickness="2" Grid.Column="2" Grid.Row="4">
+            <StackPanel Orientation="Vertical">
+                <TextBlock FontWeight="Bold" FontSize="16" Text="Заголовок: "></TextBlock>
+                <TextBlock FontSize="14" Text="{Binding SelectedProduct.Header}" TextWrapping="Wrap"></TextBlock>
+                   
+                <TextBlock FontWeight="Bold" FontSize="16" Text="Аннотация: "></TextBlock>
+                <TextBlock FontSize="14" Text="{Binding SelectedProduct.Annotation}" TextWrapping="Wrap"></TextBlock>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

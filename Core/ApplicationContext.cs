@@ -9,7 +9,7 @@ public class ApplicationContext : DbContext
     public DbSet<Docs_of_product> Docs_of_product { get; set; }
     public DbSet<Document> Document { get; set; }
     public DbSet<doc_content_other> doc_content_other { get; set; }
-    public DbSet<doc_content_thech_drawning> doc_content_thech_drawning { get; set; }
+    public DbSet<doc_content_thech_drawning> doc_content_tech_drawning { get; set; }
 
   
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

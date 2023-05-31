@@ -40,7 +40,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <Button Command="{Binding GoToProducts}"> Переход на страницу продуктов проекта</Button>
+            <Button Command="{Binding GoToProducts}"> Переход на страницу изделий проекта</Button>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal">
             <Button Command="{Binding AddProjectCommand}" Margin="5"
@@ -49,10 +49,11 @@
         </StackPanel>
         <Border Margin="10" BorderBrush="{DynamicResource AccentFillColorDefaultBrush}" BorderThickness="2" Grid.Column="2" Grid.Row="4">
             <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock FontSize="14" Text="Заголовок: "></TextBlock>
-                    <TextBlock FontSize="14" Text="{Binding SelectedProject.Header}"></TextBlock>
-                </StackPanel>
+                <TextBlock FontWeight="Bold" FontSize="16" Text="Заголовок: "></TextBlock>
+                <TextBlock FontSize="14" Text="{Binding SelectedProject.Header}" TextWrapping="Wrap"></TextBlock>
+                   
+                <TextBlock FontWeight="Bold" FontSize="16" Text="Аннотация: "></TextBlock>
+                <TextBlock FontSize="14" Text="{Binding SelectedProject.Annotation}" TextWrapping="Wrap"></TextBlock>
             </StackPanel>
         </Border>
     </Grid>

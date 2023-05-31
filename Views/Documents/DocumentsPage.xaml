@@ -38,11 +38,11 @@
             <RowDefinition Height="50" />
             <RowDefinition Height="10" />
         </Grid.RowDefinitions>
-        <TextBlock Margin="5" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center"
+        <TextBlock Margin="5" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center"
                    VerticalAlignment="Center" FontSize="20" Text="{Binding Product.Header, StringFormat={}Управление документами в продукте: {0}}">
         </TextBlock>
         <TextBlock Margin="5" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"
-                   FontSize="14" Text="Список проектов">
+                   FontSize="14" Text="Список документов">
         </TextBlock>
         <ListBox Grid.RowSpan="2" Margin="10" VirtualizingPanel.ScrollUnit="Pixel" SelectedItem="{Binding SelectedDocument}"
                  ItemsSource="{Binding Documents}" Grid.Column="1" Grid.Row="4"
@@ -51,7 +51,7 @@
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="{Binding Header}"></TextBlock>
-                        <TextBlock Text="{Binding Type}"></TextBlock>
+                        <TextBlock Text="{Binding Doc_type}"></TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -59,27 +59,34 @@
         <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Button Command="{Binding GoToProducts}"> Вернуться на страницу продуктов проекта</Button>
         </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal" Grid.ColumnSpan="2">
+        <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal" Grid.ColumnSpan="3">
             <Button Command="{Binding AddOtherDocument}" Margin="5"
                     Content="Создать обычный документ">
             </Button>
             <Button Command="{Binding AddDrawableDocument}" Margin="5"
                     Content="Создать документ-чертеж">
             </Button>
-            <Button Command="{Binding }" Margin="5"
+            <Button Command="{Binding AddNewDocFileCommand }" Margin="5"
                     Content="Добавить файл документа">
             </Button>
         </StackPanel>
-        <Border Margin="10" BorderBrush="{DynamicResource AccentFillColorDefaultBrush}" BorderThickness="2" Grid.Column="2" Grid.Row="4">
-            <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock FontSize="14" Text="Заголовок: "></TextBlock>
-                    <TextBlock FontSize="14" Text="{Binding SelectedDocument.Header}"></TextBlock>
+        <Border CornerRadius="10" Margin="10" BorderBrush="{DynamicResource AccentFillColorDefaultBrush}" BorderThickness="2" Grid.Column="2" Grid.Row="4">
+            <ScrollViewer VirtualizingPanel.ScrollUnit="Pixel">
+                <StackPanel Margin="10" Orientation="Vertical">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock FontWeight="Bold" FontSize="16" Text="Заголовок: "></TextBlock>
+                        <TextBlock FontSize="14" Text="{Binding SelectedDocument.Header}"></TextBlock>
+                        <TextBlock FontWeight="Bold" FontSize="16" Text="Заметка: "></TextBlock>
+                        <TextBlock FontSize="14" Text="{Binding SelectedDocument.Note}"></TextBlock>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
+            </ScrollViewer>
+
         </Border>
-            <Border Margin="10" BorderBrush="{DynamicResource AccentFillColorDefaultBrush}" BorderThickness="2" Grid.Column="2" Grid.Row="5">
-                <Frame NavigationUIVisibility="Hidden" Content="{Binding SelectedViewModel}"/>
+            <Border CornerRadius="10" Margin="10" BorderBrush="{DynamicResource AccentFillColorDefaultBrush}" BorderThickness="2" Grid.Column="2" Grid.Row="5">
+                <ScrollViewer VirtualizingPanel.ScrollUnit="Pixel">
+                    <Frame NavigationUIVisibility="Hidden" Margin="10" Content="{Binding SelectedViewModel}"/>
+                </ScrollViewer>
             </Border>
     </Grid>
 </UserControl>
