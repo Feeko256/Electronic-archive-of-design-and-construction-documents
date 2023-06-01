@@ -36,7 +36,7 @@
             </ListBox>
         <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Button Command="{Binding GoToProjects}"> Вернуться на страницу проектов</Button>
-            <Button Command="{Binding GoToDocuments}"> Переход на страницу документов продукта</Button>
+            <Button Command="{Binding GoToDocuments}"> Переход на страницу документов изделия</Button>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal">
             <Button Command="{Binding AddProductCommand}" Margin="5" Content="Создать изделие"></Button>

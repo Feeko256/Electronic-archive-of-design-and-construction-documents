@@ -1,0 +1,68 @@
+﻿<fw:AcrylicWindow x:Class="Electronic_archive_of_design_and_construction_documents.Views.Authorization.Registration"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                  d:DataContext="{d:DesignInstance Type=authorization:UserCreationViewModel}"
+                  mc:Ignorable="d"
+                  xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+                  xmlns:authorization="clr-namespace:Electronic_archive_of_design_and_construction_documents.ViewModels.Authorization"
+                  xmlns:core="clr-namespace:Electronic_archive_of_design_and_construction_documents.Core"
+                  Title="Registration" Height="300" Width="400" ResizeMode="CanMinimize">
+    <fw:AcrylicWindow.Resources>
+        <core:PasswordToHiddenStringConverter x:Key="PasswordToHiddenStringConverter" />
+    </fw:AcrylicWindow.Resources>
+    <Grid ShowGridLines="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="10" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="10" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
+                       Text="Имя пользователя " />
+            <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding UserName}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
+                       Text="Логин " />
+            <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Login}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3">
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
+                       Text="Пароль " />
+            <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                     Text="{Binding Password , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource PasswordToHiddenStringConverter}}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4">
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
+                       Text="Выбрать роль пользователя " />
+            <ComboBox ItemsSource="{Binding Roles}" SelectedItem="{Binding SelectedRole}" HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding RoleName}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="5">
+            <Button Command="{Binding CreateUser}">Создать пользователя</Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="6">
+            <Button Command="{Binding GoToLogin}">Есть аккаунту? Войти</Button>
+        </StackPanel>
+    </Grid>
+</fw:AcrylicWindow>

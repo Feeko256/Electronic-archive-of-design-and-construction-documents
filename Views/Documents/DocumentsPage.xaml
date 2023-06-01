@@ -39,7 +39,7 @@
             <RowDefinition Height="10" />
         </Grid.RowDefinitions>
         <TextBlock Margin="5" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center"
-                   VerticalAlignment="Center" FontSize="20" Text="{Binding Product.Header, StringFormat={}Управление документами в продукте: {0}}">
+                   VerticalAlignment="Center" FontSize="20" Text="{Binding Product.Header, StringFormat={}Управление документами в изделии: {0}}">
         </TextBlock>
         <TextBlock Margin="5" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"
                    FontSize="14" Text="Список документов">
@@ -57,7 +57,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <Button Command="{Binding GoToProducts}"> Вернуться на страницу продуктов проекта</Button>
+            <Button Command="{Binding GoToProducts}"> Вернуться на страницу изделий проекта</Button>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal" Grid.ColumnSpan="3">
             <Button Command="{Binding AddOtherDocument}" Margin="5"

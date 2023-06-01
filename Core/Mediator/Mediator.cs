@@ -18,9 +18,19 @@ public class Mediator
     
     
     public event Action<object> SelectedViewModel;
-    public event Action<object> TempSelectedViewModel;
     public event Action<object> SelectedDocumentTypeViewModel;
-
+    
+    public event Action<User> UserCreate; 
+    public event Action<ObservableCollection<Role>> RoleCreate; 
+    
+    public void OnRoleCreate(ObservableCollection<Role> roles)
+    {
+        RoleCreate.Invoke(roles);
+    }
+    public void OnUserCreate(User user)
+    {
+        UserCreate.Invoke(user);
+    }
     public void OnProjectCreation(Project project)
     {
         ProjectCreate.Invoke(project);
@@ -46,14 +56,9 @@ public class Mediator
     {
         SelectedDocument.Invoke(document);
     }
-    
     public void OnViewModelChange(Object obj)
     {
         SelectedViewModel.Invoke(obj);
-    }
-    public void OnTempViewModelChange(Object obj)
-    {
-        TempSelectedViewModel.Invoke(obj);
     }
     public void OnSelectedDocumentTypeViewModelChange(Object obj)
     {
