@@ -16,7 +16,8 @@ public class doc_content_thech_drawning : BaseViewModel
     private int version_number;
     private DateTime created_at;
     private ObservableCollection<string>? source;
-    
+    private User? creator;
+    private User? editor;
     public string Denotation
     {
         get { return denotation; }
@@ -61,5 +62,15 @@ public class doc_content_thech_drawning : BaseViewModel
     {
         get { return version_number; }
         set { version_number = value; OnPropertyChanged(); }
+    }
+    public User? Creator
+    {
+        get { return creator; }
+        set { creator = value; OnPropertyChanged(); }
+    }
+    public User? Editor
+    {
+        get { return editor; }
+        set { editor = value; OnPropertyChanged(); }
     }
 }

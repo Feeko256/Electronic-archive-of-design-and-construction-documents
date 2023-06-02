@@ -23,6 +23,17 @@ public class ProjectVewModel : BaseViewModel
     private Project selectedProject;
     public User User { get; set; }
     private Registration Registration { get; set; }
+    private bool projectsAcces;
+
+    public bool ProjectsAcces
+    {
+        get => projectsAcces;
+        set
+        {
+            projectsAcces = value;
+            OnPropertyChanged();
+        }
+    }
 
     public Project? SelectedProject
     {
@@ -54,7 +65,7 @@ public class ProjectVewModel : BaseViewModel
                     //так надо что бы главное окно блокировалось
                     //при открытии диалогового окна для создания проекта
                 }
-            }, obj=> User.Id == 1);
+            }, obj=> User != null && User.Id == 1);
         }
     }
 
@@ -88,7 +99,7 @@ public class ProjectVewModel : BaseViewModel
                     //так надо что бы главное окно блокировалось
                     //при открытии диалогового окна для создания проекта
                 }  
-            }, obj => User.Role.Id == 1);
+            }, obj => User!=null && User.Role.Id == 1);
         }
     }
     private void OnProjectCreation(Project project)
@@ -99,8 +110,12 @@ public class ProjectVewModel : BaseViewModel
     private void OnUserChange(User user)
     {
         User = user;
-        if(user!=null)
+        if (user != null)
+        {
             MessageBox.Show("добро пожаловать " + user.Username);
+            ProjectsAcces = true;
+        }
+            
     }
     public ProjectVewModel(ObservableCollection<Project>? projects, ApplicationContext db, Mediator mediator)
     {

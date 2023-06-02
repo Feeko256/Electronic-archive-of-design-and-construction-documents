@@ -30,7 +30,8 @@
         </TextBlock>
         <ListBox Margin="10" VirtualizingPanel.ScrollUnit="Pixel" SelectedItem="{Binding SelectedProject}"
                  ItemsSource="{Binding Projects}" Grid.Column="1" Grid.Row="4"
-                 BorderBrush="{DynamicResource AccentFillColorDefaultBrush}" BorderThickness="2">
+                 BorderBrush="{DynamicResource AccentFillColorDefaultBrush}" BorderThickness="2"
+                 IsEnabled="{Binding ProjectsAcces}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>

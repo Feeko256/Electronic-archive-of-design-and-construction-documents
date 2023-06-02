@@ -17,6 +17,10 @@
             <StackPanel Margin="10" Orientation="Vertical">
                 <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Дата создания"/>
                 <TextBlock FontSize="14" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="{Binding Document.Doc_Content_Tech_Drawning[0].Created_at  }"/>
+                <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Автор документа"/>
+                <TextBlock FontSize="14" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="{Binding Document.Doc_Content_Tech_Drawning[0].Creator.Username  }"/>
+                <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Редактор документа"/>
+                <TextBlock FontSize="14" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="{Binding Document.Doc_Content_Tech_Drawning[0].Editor.Username  }"/>
                 <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Обозначение" />
                 <TextBlock FontSize="14" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="{Binding Document.Doc_Content_Tech_Drawning[0].Denotation  }"/>
                 <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Материал" />

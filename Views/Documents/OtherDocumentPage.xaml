@@ -26,6 +26,10 @@
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
             <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Дата создания"/>
             <TextBlock FontSize="14" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="{Binding Document.Doc_Content_Other[0].Created_at  }"/>
+            <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Автор документа"/>
+            <TextBlock FontSize="14" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="{Binding Document.Doc_Content_Other[0].Creator.Username  }"/>
+            <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Редактор документа"/>
+            <TextBlock FontSize="14" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="{Binding Document.Doc_Content_Other[0].Editor.Username  }"/>
             <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Номер версии"/>
             <TextBlock FontSize="14" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="{Binding Document.Doc_Content_Other[0].Version_number  }"/>
             <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SystemControlAcrylicWindowForegroundBrush}" Text="Список файлов"/>

@@ -77,7 +77,7 @@ public class DocumentViewModel  : BaseViewModel
                 createOtherCreationView = new OtherDocumentCreationView()
                 {
 
-                    DataContext = new DocumentOtherCreationViewModel(mediator)
+                    DataContext = new DocumentOtherCreationViewModel(mediator, User)
                 };
                 if (createOtherCreationView.ShowDialog() == true)
                 {
@@ -98,7 +98,7 @@ public class DocumentViewModel  : BaseViewModel
                 createDrawableCreationView = new DrawibleDocumentCreationView()
                 {
 
-                    DataContext = new DocumentDrawingCreationViewModel(mediator)
+                    DataContext = new DocumentDrawingCreationViewModel(mediator, User)
                 };
                 if (createDrawableCreationView.ShowDialog() == true)
                 {
@@ -125,6 +125,7 @@ public class DocumentViewModel  : BaseViewModel
                         if (SelectedDocument.Doc_Content_Other[0].Source == null)
                             SelectedDocument.Doc_Content_Other[0].Source = new ObservableCollection<string>();
                         SelectedDocument.Doc_Content_Other[0].Source?.Add(openFileDialog.FileName);
+                        SelectedDocument.Doc_Content_Other[0].Editor = User;
                         foreach (var a in SelectedDocument.Doc_Content_Other)
                         {
                             db.Entry(a).State = EntityState.Modified;
@@ -136,6 +137,7 @@ public class DocumentViewModel  : BaseViewModel
                         if (SelectedDocument.Doc_Content_Tech_Drawning[0].Source == null)
                             SelectedDocument.Doc_Content_Tech_Drawning[0].Source = new ObservableCollection<string>();
                         SelectedDocument.Doc_Content_Tech_Drawning?[0].Source?.Add(openFileDialog.FileName);
+                        SelectedDocument.Doc_Content_Tech_Drawning[0].Editor = User;
                         foreach (var a in SelectedDocument.Doc_Content_Tech_Drawning)
                         {
                             db.Entry(a).State = EntityState.Modified;

@@ -23,7 +23,7 @@ public class User : BaseViewModel
             OnPropertyChanged();
         }
     } 
-
+    [Column(TypeName = "varchar(100)")]
     public string Username
     {
         get => username;

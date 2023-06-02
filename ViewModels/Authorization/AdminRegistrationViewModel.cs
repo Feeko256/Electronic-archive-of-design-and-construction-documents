@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using Electronic_archive_of_design_and_construction_documents.Core;
 using Electronic_archive_of_design_and_construction_documents.Core.Mediator;
@@ -56,7 +57,7 @@ public class AdminRegistrationViewModel : BaseViewModel
             // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
             return createUser ??= new RelayCommand(obj =>
             {
-                Users.Add(new User() { Username = UserName, Login = Login, Password = Password, Role = Roles[1] });
+                Users.Add(new User() { Username = UserName, Login = Login, Password = Password, Role = Roles.FirstOrDefault(f=>f.Id == 1) });
                 db.SaveChanges();
                 CloseWindow(obj);
             });

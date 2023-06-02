@@ -19,7 +19,7 @@ public class DocumentOtherCreationViewModel : BaseViewModel
     private int versionNumber;
     private ObservableCollection<string> files;
     private RelayCommand addNewDocFileCommand;
-
+    public User User { get; set; }
     public ObservableCollection<string> Files
     {
         get => files;
@@ -64,6 +64,8 @@ public class DocumentOtherCreationViewModel : BaseViewModel
                             Created_at = DateTime.Now,
                             Source = new ObservableCollection<string>(Files),
                             Version_number = VersionNumber,
+                            Creator = User,
+                            Editor = User
                         }
                     },
                     Doc_type = "Обычный документ"
@@ -96,9 +98,10 @@ public class DocumentOtherCreationViewModel : BaseViewModel
         (window as Window)?.Close();
     }
 
-    public DocumentOtherCreationViewModel(Mediator mediator)
+    public DocumentOtherCreationViewModel(Mediator mediator, User user)
     {
         this.mediator = mediator;
+        User = user;
         Files = new ObservableCollection<string>();
     }
 }

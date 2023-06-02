@@ -67,8 +67,7 @@ public class MainWindowViewModel : BaseViewModel
                     //при открытии диалогового окна для создания проекта
                 }  
             }
-            else if(SearchAdmins())
-            {
+            
                 Login = new Login()
                 {
 
@@ -79,8 +78,6 @@ public class MainWindowViewModel : BaseViewModel
                     //так надо что бы главное окно блокировалось
                     //при открытии диалогового окна для создания проекта
                 }   
-            }
-
             
             mediator.SelectedViewModel += OnSelectedViewModelChange;
             mediator.OnViewModelChange(a);
@@ -103,7 +100,7 @@ public class MainWindowViewModel : BaseViewModel
 
     private void DbLoad()
     {
-        //db.Database.EnsureDeleted();
+       //db.Database.EnsureDeleted();
         db.Database.EnsureCreated(); //загрузка бд
         //загрузка таблиц
         db.Project.Load();

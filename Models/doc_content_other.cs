@@ -11,6 +11,8 @@ public class doc_content_other : BaseViewModel
     public int Id { get; set; }
     private int version_number;
     private DateTime created_at;
+    private User? creator;
+    private User? editor;
     private ObservableCollection<string>? source;
     
     public int Version_number
@@ -27,5 +29,15 @@ public class doc_content_other : BaseViewModel
     {
         get { return source; }
         set { source = value; OnPropertyChanged(); }
+    }
+    public User? Creator
+    {
+        get { return creator; }
+        set { creator = value; OnPropertyChanged(); }
+    }
+    public User? Editor
+    {
+        get { return editor; }
+        set { editor = value; OnPropertyChanged(); }
     }
 }

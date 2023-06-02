@@ -22,7 +22,7 @@ public class Document : BaseViewModel
             OnPropertyChanged();
         }
     }
-    [Column(TypeName = "varchar(50)")]
+    [Column(TypeName = "varchar(200)")]
     public string Note
     {
         get { return note; }
@@ -32,6 +32,7 @@ public class Document : BaseViewModel
             OnPropertyChanged();
         }
     }
+    [Column(TypeName = "varchar(100)")]
     public string Header
     {
         get { return header; }

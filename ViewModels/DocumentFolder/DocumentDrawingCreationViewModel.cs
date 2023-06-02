@@ -23,6 +23,7 @@ public class DocumentDrawingCreationViewModel : BaseViewModel
     private int version_number;
     private ObservableCollection<string>? source;
     private RelayCommand addNewDocFileCommand;
+    public User User { get; set; }
     public string Header
     {
         get { return header; }
@@ -97,6 +98,8 @@ public class DocumentDrawingCreationViewModel : BaseViewModel
                             Mass = Mass,
                             Scale = Scale,
                             Company_name = Company_name,
+                            Creator = User,
+                            Editor = User
                         }
                     },
                     Doc_type = "Документ-чертеж"
@@ -122,7 +125,6 @@ public class DocumentDrawingCreationViewModel : BaseViewModel
                 {
                     Source.Add(openFileDialog.FileName);
                 }
-
             });
         }
     }
@@ -131,9 +133,10 @@ public class DocumentDrawingCreationViewModel : BaseViewModel
         (window as Window)?.Close();
     }
 
-    public DocumentDrawingCreationViewModel(Mediator mediator)
+    public DocumentDrawingCreationViewModel(Mediator mediatorб, User user)
     {
         this.mediator = mediator;
+        User = user;
         Source = new ObservableCollection<string>();
     }
 }
