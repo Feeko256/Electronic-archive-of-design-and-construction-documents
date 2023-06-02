@@ -65,7 +65,7 @@ public class ProjectVewModel : BaseViewModel
                     //так надо что бы главное окно блокировалось
                     //при открытии диалогового окна для создания проекта
                 }
-            }, obj=> User != null && User.Id == 1);
+            }, obj=> User != null && User.Role.Id == 1);
         }
     }
 

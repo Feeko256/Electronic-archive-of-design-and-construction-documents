@@ -57,9 +57,18 @@ public class AdminRegistrationViewModel : BaseViewModel
             // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
             return createUser ??= new RelayCommand(obj =>
             {
-                Users.Add(new User() { Username = UserName, Login = Login, Password = Password, Role = Roles.FirstOrDefault(f=>f.Id == 1) });
-                db.SaveChanges();
-                CloseWindow(obj);
+                if (!Users.Any(f => f.Login == Login))
+                {
+                    Users.Add(new User()
+                    {
+                        Username = UserName, Login = Login, Password = Password,
+                        Role = Roles.FirstOrDefault(f => f.Id == 1)
+                    });
+                    db.SaveChanges();
+                    CloseWindow(obj);
+                }
+                else
+                    MessageBox.Show("Логин уже занят!");
             });
         }
     }

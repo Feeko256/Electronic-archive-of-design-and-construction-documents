@@ -73,8 +73,8 @@ public class RegistrationViewModel : BaseViewModel
                     db.SaveChanges();
                     CloseWindow(obj);
                 }
-
-                MessageBox.Show("Логин уже занят!");
+                else
+                    MessageBox.Show("Логин уже занят!");
             });
         }
     }

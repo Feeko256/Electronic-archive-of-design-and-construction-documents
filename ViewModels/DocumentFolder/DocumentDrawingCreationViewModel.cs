@@ -133,7 +133,7 @@ public class DocumentDrawingCreationViewModel : BaseViewModel
         (window as Window)?.Close();
     }
 
-    public DocumentDrawingCreationViewModel(Mediator mediatorб, User user)
+    public DocumentDrawingCreationViewModel(Mediator mediator, User user)
     {
         this.mediator = mediator;
         User = user;

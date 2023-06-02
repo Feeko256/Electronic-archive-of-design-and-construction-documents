@@ -84,7 +84,7 @@ public class DocumentViewModel  : BaseViewModel
                     //так надо что бы главное окно блокировалось
                     //при открытии диалогового окна для создания проекта
                 }
-            }, obj=> User.Id == 1);
+            }, obj=> User.Role.Id == 1);
         }
     }
     public RelayCommand AddDrawableDocument
@@ -105,7 +105,7 @@ public class DocumentViewModel  : BaseViewModel
                     //так надо что бы главное окно блокировалось
                     //при открытии диалогового окна для создания проекта
                 }
-            }, obj=> User.Id == 1);
+            }, obj=> User.Role.Id == 1);
         }
     }
     public RelayCommand AddNewDocFileCommand
