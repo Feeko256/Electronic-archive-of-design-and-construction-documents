@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Electronic_archive_of_design_and_construction_documents.Core;
@@ -38,30 +39,57 @@ public class MainWindowViewModel : BaseViewModel
         SelectedViewModel = obj;
     }
 
+    public ObservableCollection<Role> Roles { get; set; }
     public MainWindowViewModel()
     {
             db = new ApplicationContext();//инициализация контекста бд
             mediator = new Mediator();
             DbLoad();
-
-            Registration = new Registration()
+            if (Roles.Count == 0)
             {
-
-                DataContext = new UserCreationViewModel(mediator, db)
-            };
-            if (Registration.ShowDialog() == true)
-            {
-                //так надо что бы главное окно блокировалось
-                //при открытии диалогового окна для создания проекта
+                Roles.Add(new Role { RoleName = "Администратор" });
+                Roles.Add(new Role { RoleName = "Редактор" });
+                Roles.Add(new Role { RoleName = "Наблюдатель" });
+                db.SaveChanges();
             }
+            if(!SearchAdmins())
+            {
+                Registration = new Registration()
+                {
+
+                    DataContext = new RegistrationViewModel(mediator, db)
+                };
+                if (Registration.ShowDialog() == true)
+                {
+                    //так надо что бы главное окно блокировалось
+                    //при открытии диалогового окна для создания проекта
+                }  
+            }
+
             var a = new ProjectVewModel(Project, db, mediator);
             mediator.SelectedViewModel += OnSelectedViewModelChange;
             mediator.OnViewModelChange(a);
     }
 
+    private bool SearchAdmins()
+    {
+        bool isAdmin = false;
+        var Users = db.User.Local.ToObservableCollection();
+        foreach (var a in Users)
+        {
+            if (a.Role.RoleName == "Администратор")
+            {
+                MessageBox.Show(a.Role.Id.ToString());
+                isAdmin = true;
+                return isAdmin;
+            }
+        }
+        return isAdmin;
+    }
+
     private void DbLoad()
     {
-        //db.Database.EnsureDeleted(); //вызвать при изменении структуры бд
+       // db.Database.EnsureDeleted();
         db.Database.EnsureCreated(); //загрузка бд
         //загрузка таблиц
         db.Project.Load();
@@ -71,6 +99,7 @@ public class MainWindowViewModel : BaseViewModel
         db.Doc_content_tech_drawning.Load();
         db.User.Load();
         db.Role.Load();
+        Roles = db.Role.Local.ToObservableCollection();
         //отправка таблицы проектов в колекцию проектов внутри программы для дальнейшей работы с ними
         //другие таблицы так подгружать не надо вроде
         Project = db.Project.Local.ToObservableCollection();

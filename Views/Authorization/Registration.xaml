@@ -3,11 +3,12 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                  d:DataContext="{d:DesignInstance Type=authorization:UserCreationViewModel}"
+                  d:DataContext="{d:DesignInstance Type=authorization:RegistrationViewModel}"
                   mc:Ignorable="d"
                   xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
                   xmlns:authorization="clr-namespace:Electronic_archive_of_design_and_construction_documents.ViewModels.Authorization"
                   xmlns:core="clr-namespace:Electronic_archive_of_design_and_construction_documents.Core"
+                  xmlns:components="clr-namespace:PasswordBoxMVVM.Components;assembly=PasswordBoxMVVM"
                   Title="Registration" Height="300" Width="400" ResizeMode="CanMinimize">
     <fw:AcrylicWindow.Resources>
         <core:PasswordToHiddenStringConverter x:Key="PasswordToHiddenStringConverter" />
@@ -20,7 +21,6 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="10" />
-            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -41,8 +41,8 @@
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3">
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        Text="Пароль " />
-            <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                     Text="{Binding Password , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource PasswordToHiddenStringConverter}}" />
+            <components:BindablePasswordBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                     Password="{Binding Password , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource PasswordToHiddenStringConverter}}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4">
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
@@ -60,9 +60,6 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="5">
             <Button Command="{Binding CreateUser}">Создать пользователя</Button>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="6">
-            <Button Command="{Binding GoToLogin}">Есть аккаунту? Войти</Button>
         </StackPanel>
     </Grid>
 </fw:AcrylicWindow>

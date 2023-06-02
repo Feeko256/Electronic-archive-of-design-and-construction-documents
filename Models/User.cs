@@ -7,9 +7,9 @@ namespace Electronic_archive_of_design_and_construction_documents.Models;
 public class User : BaseViewModel
 {
     public int Id { get; set; }
-    private string? username;
-    private string? login;
-    private string? password;
+    private string username;
+    private string login;
+    private string password;
     private Role? role;
     private ObservableCollection<Role>? roles;
     
@@ -24,7 +24,7 @@ public class User : BaseViewModel
         }
     } 
 
-    public string? Username
+    public string Username
     {
         get => username;
         set
@@ -33,7 +33,7 @@ public class User : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public string? Login
+    public string Login
     {
         get => login;
         set
@@ -42,7 +42,7 @@ public class User : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public string? Password
+    public string Password
     {
         get => password;
         set
@@ -51,7 +51,7 @@ public class User : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public Role? Role
+    public Role Role
     {
         get => role;
         set

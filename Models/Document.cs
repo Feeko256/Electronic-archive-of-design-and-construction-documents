@@ -22,6 +22,7 @@ public class Document : BaseViewModel
             OnPropertyChanged();
         }
     }
+    [Column(TypeName = "varchar(50)")]
     public string Note
     {
         get { return note; }
