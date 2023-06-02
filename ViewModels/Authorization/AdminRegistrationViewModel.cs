@@ -6,15 +6,27 @@ using Electronic_archive_of_design_and_construction_documents.Models;
 
 namespace Electronic_archive_of_design_and_construction_documents.ViewModels.Authorization;
 
-public class LoginViewModel : BaseViewModel
+public class AdminRegistrationViewModel : BaseViewModel
 {
     private Mediator mediator;
     private ApplicationContext db;
-    private ObservableCollection<User> users;
-    private string login;
+    private RelayCommand createUser;
+    public ObservableCollection<Role> Roles { get; set; }
+    public ObservableCollection<User> Users { get; set; }
     private string password;
-    private RelayCommand loginCommand;
 
+    private string userName;
+    private string login;
+
+    public string UserName
+    {
+        get => userName;
+        set
+        {
+            userName = value;
+            OnPropertyChanged();
+        }
+    }
 
     public string Login
     {
@@ -25,6 +37,7 @@ public class LoginViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
+
     public string Password
     {
         get => password;
@@ -34,41 +47,32 @@ public class LoginViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public RelayCommand LoginCommand
+    
+
+    public RelayCommand CreateUser
     {
         get
         {
             // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
-            return loginCommand ??= new RelayCommand(obj =>
+            return createUser ??= new RelayCommand(obj =>
             {
-                bool success = false;
-                foreach (var a in users)
-                {
-                    if (Login == a.Login && Password == a.Password)
-                    {
-                        mediator.OnCurrentUserChange(a);
-                        success = true;
-                        CloseWindow(obj);
-                        break;
-                    }
-                    
-                }
-                if(!success)
-                    MessageBox.Show("Неверный логин или пароль!");
+                Users.Add(new User() { Username = UserName, Login = Login, Password = Password, Role = Roles[1] });
+                db.SaveChanges();
+                CloseWindow(obj);
             });
         }
     }
+
     private void CloseWindow(object window)
     {
         (window as Window)?.Close();
     }
 
-    public LoginViewModel(Mediator mediator, ApplicationContext db)
+    public AdminRegistrationViewModel(Mediator mediator, ApplicationContext db)
     {
         this.mediator = mediator;
         this.db = db;
-        users = db.User.Local.ToObservableCollection();
-
+        Roles = db.Role.Local.ToObservableCollection();
+        Users = db.User.Local.ToObservableCollection();
     }
-    
 }

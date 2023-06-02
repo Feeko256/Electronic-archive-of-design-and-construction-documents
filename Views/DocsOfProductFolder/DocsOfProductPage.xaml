@@ -50,5 +50,16 @@
                 <TextBlock FontSize="14" Text="{Binding SelectedProduct.Annotation}" TextWrapping="Wrap"></TextBlock>
             </StackPanel>
         </Border>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="15" Text="Пользователь: "/>
+                <TextBlock FontSize="15" Text="{Binding User.Username}"/>
+                <TextBlock FontSize="15" Text=" "/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="15" Text="Права доступа: "/>
+                <TextBlock FontSize="15" Text="{Binding User.Role.RoleName}"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>

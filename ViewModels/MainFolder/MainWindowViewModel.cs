@@ -19,7 +19,7 @@ public class MainWindowViewModel : BaseViewModel
     private ApplicationContext db;
     private object selectedViewModel;
     private object tempSelectedViewModel;
-    private Registration Registration { get; set; }
+    private AdminRegistration AdminRegistration { get; set; }
     private Login Login { get; set; }
 
     private ObservableCollection<Project> Project { get; set; }
@@ -56,12 +56,12 @@ public class MainWindowViewModel : BaseViewModel
             }
             if(!SearchAdmins())
             {
-                Registration = new Registration()
+                AdminRegistration = new AdminRegistration()
                 {
 
-                    DataContext = new RegistrationViewModel(mediator, db)
+                    DataContext = new AdminRegistrationViewModel(mediator, db)
                 };
-                if (Registration.ShowDialog() == true)
+                if (AdminRegistration.ShowDialog() == true)
                 {
                     //так надо что бы главное окно блокировалось
                     //при открытии диалогового окна для создания проекта

@@ -3,8 +3,10 @@ using System.Windows;
 using Electronic_archive_of_design_and_construction_documents.Core;
 using Electronic_archive_of_design_and_construction_documents.Core.Mediator;
 using Electronic_archive_of_design_and_construction_documents.Models;
+using Electronic_archive_of_design_and_construction_documents.ViewModels.Authorization;
 using Electronic_archive_of_design_and_construction_documents.ViewModels.ProductFolder;
 using Electronic_archive_of_design_and_construction_documents.Views;
+using Electronic_archive_of_design_and_construction_documents.Views.Authorization;
 using Electronic_archive_of_design_and_construction_documents.Views.ProjectFolder;
 
 namespace Electronic_archive_of_design_and_construction_documents.ViewModels.ProjectFolder;
@@ -16,9 +18,11 @@ public class ProjectVewModel : BaseViewModel
     private RelayCommand addProjectCommand;
     private ApplicationContext db;
     private RelayCommand goToProducts;
+    private RelayCommand registerNewUser;
     private Mediator mediator { get; set; }
     private Project selectedProject;
-    private User user;
+    public User User { get; set; }
+    private Registration Registration { get; set; }
 
     public Project? SelectedProject
     {
@@ -50,7 +54,7 @@ public class ProjectVewModel : BaseViewModel
                     //так надо что бы главное окно блокировалось
                     //при открытии диалогового окна для создания проекта
                 }
-            });
+            }, obj=> User.Id == 1);
         }
     }
 
@@ -61,13 +65,32 @@ public class ProjectVewModel : BaseViewModel
             // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
             return goToProducts ??= new RelayCommand(obj =>
             {
-                mediator.OnViewModelChange(new DocsOfProductViewModel(mediator, this, db));
+                mediator.OnViewModelChange(new DocsOfProductViewModel(mediator, this, db, User));
                 if (SelectedProject != null) 
                     mediator.OnSelectedProjectChange(SelectedProject);
             }, obj => SelectedProject != null);
         }
     }
+    public RelayCommand RegisterNewUser
+    {
+        get
+        {
+            // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
+            return registerNewUser ??= new RelayCommand(obj =>
+            {
+                Registration = new Registration()
+                {
 
+                    DataContext = new RegistrationViewModel(mediator, db)
+                };
+                if (Registration.ShowDialog() == true)
+                {
+                    //так надо что бы главное окно блокировалось
+                    //при открытии диалогового окна для создания проекта
+                }  
+            }, obj => User.Role.Id == 1);
+        }
+    }
     private void OnProjectCreation(Project project)
     {
         Projects.Add(project);
@@ -75,7 +98,7 @@ public class ProjectVewModel : BaseViewModel
     }
     private void OnUserChange(User user)
     {
-        this.user = user;
+        User = user;
         if(user!=null)
             MessageBox.Show("добро пожаловать " + user.Username);
     }

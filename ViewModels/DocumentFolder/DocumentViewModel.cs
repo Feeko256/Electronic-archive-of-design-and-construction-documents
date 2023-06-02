@@ -28,7 +28,7 @@ public class DocumentViewModel  : BaseViewModel
     private OtherDocumentCreationView createOtherCreationView { get; set; }
 
     private RelayCommand addProductCommand;
-
+    public User User { get; set; }
     
     public RelayCommand GoToProducts
     {
@@ -84,7 +84,7 @@ public class DocumentViewModel  : BaseViewModel
                     //так надо что бы главное окно блокировалось
                     //при открытии диалогового окна для создания проекта
                 }
-            });
+            }, obj=> User.Id == 1);
         }
     }
     public RelayCommand AddDrawableDocument
@@ -105,7 +105,7 @@ public class DocumentViewModel  : BaseViewModel
                     //так надо что бы главное окно блокировалось
                     //при открытии диалогового окна для создания проекта
                 }
-            });
+            }, obj=> User.Id == 1);
         }
     }
     public RelayCommand AddNewDocFileCommand
@@ -143,7 +143,7 @@ public class DocumentViewModel  : BaseViewModel
                         }
                     }
                 }
-            }, obj => SelectedDocument != null);
+            }, obj => SelectedDocument != null && (User.Role.Id == 1 || User.Role.Id == 2));
         }
     }
     
@@ -167,11 +167,12 @@ public class DocumentViewModel  : BaseViewModel
         Product.Documents.Add(document);
         db.SaveChanges();
     }
-    public DocumentViewModel(Mediator mediator, object lastVM, ApplicationContext db)
+    public DocumentViewModel(Mediator mediator, object lastVM, ApplicationContext db, User user)
     {
         this.db = db;
         this.lastVM = lastVM;
         this.mediator = mediator;
+        User = user;
         this.mediator.SelectedProduct += OnSelectedProductChange;
         this.mediator.SelectedDocumentTypeViewModel += OnSelectedDocumentTypeViewModelChange;
         this.mediator.DocumentCreate += OnProjectCreation;

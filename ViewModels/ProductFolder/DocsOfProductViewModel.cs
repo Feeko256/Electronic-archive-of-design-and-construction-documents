@@ -19,6 +19,7 @@ public class DocsOfProductViewModel : BaseViewModel
     private Docs_of_product selectedProduct;
     private DocsOfProductCreationView createProductView { get; set; }
     private RelayCommand addProductCommand;
+    public User User { get; set; }
     public RelayCommand GoToProjects
     {
         get
@@ -49,7 +50,7 @@ public class DocsOfProductViewModel : BaseViewModel
             // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
             return goToDocuments ??= new RelayCommand(obj =>
             {
-                mediator.OnViewModelChange(new DocumentViewModel(mediator, this, db));
+                mediator.OnViewModelChange(new DocumentViewModel(mediator, this, db, User));
                 if (SelectedProduct != null) 
                     mediator.OnSelectedProductChange(SelectedProduct);
             }, obj => SelectedProduct != null);
@@ -72,7 +73,7 @@ public class DocsOfProductViewModel : BaseViewModel
                     //так надо что бы главное окно блокировалось
                     //при открытии диалогового окна для создания проекта
                 }
-            });
+            }, obj=> User.Id == 1);
         }
     }
     private void OnProductCreation(Docs_of_product product)
@@ -86,9 +87,10 @@ public class DocsOfProductViewModel : BaseViewModel
         Products = new ObservableCollection<Docs_of_product>(project.DocsOfProduct);
         Project = project;
     }
-    public DocsOfProductViewModel(Mediator mediator, object lastVM, ApplicationContext db)
+    public DocsOfProductViewModel(Mediator mediator, object lastVM, ApplicationContext db, User user)
     {
         this.db = db;
+        User = user;
         this.lastVM = lastVM;
         this.mediator = mediator;
         this.mediator.SelectedProject += OnSelectedProjectChange;

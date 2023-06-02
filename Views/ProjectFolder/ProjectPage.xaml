@@ -6,7 +6,7 @@
              xmlns:project="clr-namespace:Electronic_archive_of_design_and_construction_documents.ViewModels.ProjectFolder"
              d:DataContext="{d:DesignInstance Type=project:ProjectVewModel}"
              mc:Ignorable="d">
-    <Grid ShowGridLines="False">
+    <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10" />
             <ColumnDefinition Width="*" />
@@ -42,9 +42,25 @@
         <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Button Command="{Binding GoToProducts}"> Переход на страницу изделий проекта</Button>
         </StackPanel>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="15" Text="Пользователь: "/>
+                <TextBlock FontSize="15" Text="{Binding User.Username}"/>
+                <TextBlock FontSize="15" Text=" "/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="15" Text="Права доступа: "/>
+                <TextBlock FontSize="15" Text="{Binding User.Role.RoleName}"/>
+            </StackPanel>
+        </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal">
             <Button Command="{Binding AddProjectCommand}" Margin="5"
                     Content="Создать проект">
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="5" Orientation="Horizontal">
+            <Button Command="{Binding RegisterNewUser}" Margin="5"
+                    Content="Зарегистрировать нового пользователя в программе">
             </Button>
         </StackPanel>
         <Border Margin="10" BorderBrush="{DynamicResource AccentFillColorDefaultBrush}" BorderThickness="2" Grid.Column="2" Grid.Row="4">
