@@ -20,16 +20,11 @@ public class Mediator
     public event Action<object> SelectedViewModel;
     public event Action<object> SelectedDocumentTypeViewModel;
     
-    public event Action<User> UserCreate; 
-    public event Action<ObservableCollection<Role>> RoleCreate; 
-    
-    public void OnRoleCreate(ObservableCollection<Role> roles)
+    public event Action<User> CurrentUser; 
+
+    public void OnCurrentUserChange(User user)
     {
-        RoleCreate.Invoke(roles);
-    }
-    public void OnUserCreate(User user)
-    {
-        UserCreate.Invoke(user);
+        CurrentUser.Invoke(user);
     }
     public void OnProjectCreation(Project project)
     {

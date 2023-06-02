@@ -42,7 +42,7 @@
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        Text="Пароль " />
             <components:BindablePasswordBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                     Password="{Binding Password , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource PasswordToHiddenStringConverter}}" />
+                     Password="{Binding Password , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4">
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
@@ -59,7 +59,8 @@
             </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="5">
-            <Button Command="{Binding CreateUser}">Создать пользователя</Button>
+            <Button Command="{Binding CreateUser}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
+                 AncestorType={x:Type Window}}, Path=.}">Создать пользователя</Button>
         </StackPanel>
     </Grid>
 </fw:AcrylicWindow>

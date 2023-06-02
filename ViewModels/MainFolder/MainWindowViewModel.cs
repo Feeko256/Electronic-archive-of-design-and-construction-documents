@@ -20,6 +20,7 @@ public class MainWindowViewModel : BaseViewModel
     private object selectedViewModel;
     private object tempSelectedViewModel;
     private Registration Registration { get; set; }
+    private Login Login { get; set; }
 
     private ObservableCollection<Project> Project { get; set; }
    // public UserControl Page { get; set; }
@@ -45,6 +46,7 @@ public class MainWindowViewModel : BaseViewModel
             db = new ApplicationContext();//инициализация контекста бд
             mediator = new Mediator();
             DbLoad();
+            var a = new ProjectVewModel(Project, db, mediator);
             if (Roles.Count == 0)
             {
                 Roles.Add(new Role { RoleName = "Администратор" });
@@ -65,8 +67,21 @@ public class MainWindowViewModel : BaseViewModel
                     //при открытии диалогового окна для создания проекта
                 }  
             }
+            else if(SearchAdmins())
+            {
+                Login = new Login()
+                {
 
-            var a = new ProjectVewModel(Project, db, mediator);
+                    DataContext = new LoginViewModel(mediator, db)
+                };
+                if (Login.ShowDialog() == true)
+                {
+                    //так надо что бы главное окно блокировалось
+                    //при открытии диалогового окна для создания проекта
+                }   
+            }
+
+            
             mediator.SelectedViewModel += OnSelectedViewModelChange;
             mediator.OnViewModelChange(a);
     }
@@ -79,7 +94,6 @@ public class MainWindowViewModel : BaseViewModel
         {
             if (a.Role.RoleName == "Администратор")
             {
-                MessageBox.Show(a.Role.Id.ToString());
                 isAdmin = true;
                 return isAdmin;
             }
@@ -89,7 +103,7 @@ public class MainWindowViewModel : BaseViewModel
 
     private void DbLoad()
     {
-       // db.Database.EnsureDeleted();
+        //db.Database.EnsureDeleted();
         db.Database.EnsureCreated(); //загрузка бд
         //загрузка таблиц
         db.Project.Load();

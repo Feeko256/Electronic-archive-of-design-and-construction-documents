@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows;
 using Electronic_archive_of_design_and_construction_documents.Core;
 using Electronic_archive_of_design_and_construction_documents.Core.Mediator;
 using Electronic_archive_of_design_and_construction_documents.Models;
@@ -17,6 +18,7 @@ public class ProjectVewModel : BaseViewModel
     private RelayCommand goToProducts;
     private Mediator mediator { get; set; }
     private Project selectedProject;
+    private User user;
 
     public Project? SelectedProject
     {
@@ -71,12 +73,18 @@ public class ProjectVewModel : BaseViewModel
         Projects.Add(project);
         db.SaveChanges();
     }
+    private void OnUserChange(User user)
+    {
+        this.user = user;
+        if(user!=null)
+            MessageBox.Show("добро пожаловать " + user.Username);
+    }
     public ProjectVewModel(ObservableCollection<Project>? projects, ApplicationContext db, Mediator mediator)
     {
         this.db = db;
         Projects = projects;
         this.mediator = mediator;
         this.mediator.ProjectCreate += OnProjectCreation;
-
+        this.mediator.CurrentUser += OnUserChange;
     }
 }
