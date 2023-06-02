@@ -6,7 +6,7 @@
              xmlns:project="clr-namespace:Electronic_archive_of_design_and_construction_documents.ViewModels.ProjectFolder"
              d:DataContext="{d:DesignInstance Type=project:ProjectVewModel}"
              mc:Ignorable="d">
-    <Grid ShowGridLines="True">
+    <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10" />
             <ColumnDefinition Width="*" />

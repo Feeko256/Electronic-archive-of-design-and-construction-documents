@@ -9,7 +9,7 @@
                   d:DataContext="{d:DesignInstance Type=authorization:LoginViewModel}"
                   mc:Ignorable="d"
                   Title="Login" Height="300" Width="400">
-    <Grid ShowGridLines="True">
+    <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10" />
             <ColumnDefinition Width="*" />
